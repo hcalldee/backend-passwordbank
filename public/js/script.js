@@ -1,8 +1,9 @@
 var t = null
 var rw = null
+var apilink="https://passwordbank.herokuapp.com/"
 $(document).ready( function () {
     t = $('#example').DataTable();
-    $.get("http://localhost:8080/users",function(data) {
+    $.get(apilink+"users",function(data) {
         data.forEach(d => {
             t.row.add([d.username,
                 // "<textarea style='resize:none' class='form-control' disabled rows='3'>"+d.generated+"</textarea>",
@@ -37,7 +38,7 @@ $('#example').on('click','.edit', function (ev) {
     stat = 'edit'
     ev.stopImmediatePropagation();
     $.ajax({
-        url:"http://localhost:8080/users/search",
+        url:apilink+"users/search",
         type:'post',
         data:{
             id:$(this).attr('data-id')
@@ -62,7 +63,7 @@ $('#example').on('click','.delete', function (ev) {
     stat = 'delete'
     ev.stopImmediatePropagation();
     $.ajax({
-        url:"http://localhost:8080/users/search",
+        url:apilink+"users/search",
         type:'post',
         data:{
             id:$(this).attr('data-id')
@@ -98,7 +99,7 @@ $('#btndecrypt').click(function() {
         }
         $('#kym').val('')
         $.ajax({
-            url:"http://localhost:8080/users/decrypt",
+            url:apilink+"users/decrypt",
             type:'post',
             data:data,
             datatype:'JSON',
@@ -119,7 +120,7 @@ $('#btndecrypt').click(function() {
             'new_ky': $('#kyen').val(),
         }
         $.ajax({
-            url:"http://localhost:8080/users/edit",
+            url:apilink+"users/edit",
             type:'patch',
             data:data,
             datatype:'JSON',
@@ -136,7 +137,7 @@ $('#btndecrypt').click(function() {
             'pw': $('#pwd').val(),
         }
         $.ajax({
-            url:"http://localhost:8080/users/delete",
+            url:apilink+"users/delete",
             type:'delete',
             data:data,
             datatype:'JSON',
@@ -156,7 +157,7 @@ $('#add').click(function() {
         'site': $('#site').val()
     }
     $.ajax({
-        url:"http://localhost:8080/users/",
+        url:apilink+"users/",
         type:'post',
         data:data,
         datatype:'JSON',
