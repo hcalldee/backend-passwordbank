@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Bank</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+</head>
+<body>
+    <!-- As a link -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Password Bank</a>
+        <a class="navbar-brand" href="#">About</a>
+    </nav>
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="title">Decryption</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="formdecrypt"hidden>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Decryption Key</label>
+                        <input type="text" class="form-control" id="usrm" hidden>
+                        <input type="text" class="form-control generated" hidden>
+                        <input type="password" class="form-control" id="kym" placeholder="Key">
+                    </div>
+                    <div class="result" hidden="true">
+                        <label for="exampleInputPassword1">your password</label>
+                        <textarea style='resize:none' id="res" class='form-control' disabled rows='3'></textarea>
+                    </div>
+                </form>
+                <form id="formedit" hidden>
+                    <div class="form-group">
+                        <!-- <label for="exampleInputPassword1">Decryption Key</label>
+                        <input type="password" class="form-control" id="kym" placeholder="Key"> -->
+                        <input type="text" class="form-control generated" hidden>
+                        <div class="row">
+                            <div class="form-group  col-6">
+                                <label for="exampleInputEmail1">username</label>
+                                <input type="text" class="form-control" required id="usre" aria-describedby="emailHelp" placeholder="Enter Username">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInputEmail1">Website</label>
+                                <input type="text" class="form-control" required id="sitee" aria-describedby="emailHelp" placeholder="url">
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">New Password</label>
+                                <input type="password" class="form-control" id="pwen" placeholder="Password">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">New Key</label>
+                                <input type="password" class="form-control" id="kyen" placeholder="Key">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">Old Password</label>
+                                <input type="password" class="form-control" id="pweo" placeholder="Password" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">Old Key</label>
+                                <input type="password" class="form-control" id="kyeo" placeholder="Key" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form id="formdelete"hidden>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Decryption Key</label>
+                            <input type="text" class="form-control generated" hidden>
+                            <input type="password" class="form-control" id="kyd" placeholder="Key">
+                            <label for="exampleInputPassword1">Decryption Password</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Password">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="btndecrypt" class="btn btn-primary">Decrypt</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="container-fluid">
+
+        <div class="card mb-2 p-3">
+
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Site</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <div class="card m-1 p-2">
+                    <h4>Encrypt</h4>
+
+                    <form>
+                        <div class="row">
+                            <div class="form-group  col-6">
+                                <label for="exampleInputEmail1">username</label>
+                                <input type="text" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Enter Username">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInputEmail1">Website</label>
+                                <input type="text" class="form-control" id="site" aria-describedby="emailHelp" placeholder="url">
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="pw" placeholder="Password">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">Key</label>
+                                <input type="password" class="form-control" id="ky" placeholder="Key">
+                            </div>
+                        </div>
+                        <button type="button" id="add" class="btn btn-primary">Encrypt</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https:////cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+<script src="js/script.js">
+</script>
+</html>
+
